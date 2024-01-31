@@ -6,6 +6,8 @@ import { getCategories } from './categories/getCategories.js'
 import { getTransactions } from './transactions/getTransactions.js'
 import { getTransacById } from './transactions/getTransacById.js'
 import { postTransaction } from './transactions/postTransaction.js'
+import { putTransaction } from './transactions/putTransaction.js'
+import { deleteTransaction } from './transactions/deleteTransaction.js'
 
 export default {
     postLogin,
@@ -16,4 +18,6 @@ export default {
     getTransactions,
     getTransacById,
     postTransaction,
+    putTransaction,
+    deleteTransaction,
 }

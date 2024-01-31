@@ -22,6 +22,14 @@ router.get('/transacao', controller.getTransactions)
 router.get('/transacao/:id', controller.getTransacById)
 
 router.put('/usuario', middleware.validateUsers, controller.putUser)
+router.put('/transacao/:id',
+    middleware.validateTransaction,
+    middleware.validateIdTransaction,
+    controller.putTransaction)
+
+router.delete('/transacao/:id',
+    middleware.validateIdTransaction,
+    controller.deleteTransaction)
 
 export default router;
 
