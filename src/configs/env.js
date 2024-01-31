@@ -1,4 +1,4 @@
 export const config = {
-    jwt_key: 'revisaocubos123!@#$%¨&*()_+',
+    jwt_key: 'desafioDeModulo2!@#$%¨&*()_+',
     http_port: 3000
 }

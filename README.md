@@ -4,18 +4,18 @@
 
 Seu papel é construir uma RESTful API que permita:
 
-- Cadastrar Usuário
-- Fazer Login 
-- Detalhar Perfil do Usuário Logado 
-- Editar Perfil do Usuário Logado 
-- Listar categorias 
-- Listar transações 
-- Detalhar transação 
-- Cadastrar transação 
-- Editar transação 
-- Remover transação 
-- Obter extrato de transações 
-- [Extra] Filtrar transações por categoria 
+- Cadastrar Usuário (OK)
+- Fazer Login (OK)
+- Detalhar Perfil do Usuário Logado (OK)
+- Editar Perfil do Usuário Logado (OK)
+- Listar categorias
+- Listar transações
+- Detalhar transação
+- Cadastrar transação
+- Editar transação
+- Remover transação
+- Obter extrato de transações
+- [Extra] Filtrar transações por categoria
 
 **Importante: Lembre-se sempre que cada usuário só pode ver e manipular seus próprios dados e suas próprias transações. Não atender a este pré-requisito é uma falha de segurança gravíssima!**
 
@@ -110,24 +110,28 @@ Abaixo, listamos os possíveis **_status codes_** esperados como resposta da API
 ```
 
 ## **Endpoints**
+
 ---
+
 # Pessoa A
+
 ### **Cadastrar usuário**
+
 #### `POST` `/usuario`
 
 Essa é a rota que será utilizada para cadastrar um novo usuario no sistema.
 
 - **Requisição**  
-    Sem parâmetros de rota ou de query.  
-    O corpo (body) deverá possuir um objeto com as seguintes propriedades (respeitando estes nomes):
+   Sem parâmetros de rota ou de query.  
+   O corpo (body) deverá possuir um objeto com as seguintes propriedades (respeitando estes nomes):
 
   - nome
   - email
   - senha
 
 - **Resposta**  
-    Em caso de **sucesso**, deveremos enviar no corpo (body) da resposta o conteúdo do usuário cadastrado, incluindo seu respectivo `id` e excluindo a senha criptografada.
-    Em caso de **falha na validação**, a resposta deverá possuir **_status code_** apropriado, e em seu corpo (body) deverá possuir um objeto com uma propriedade **mensagem** que deverá possuir como valor um texto explicando o motivo da falha.
+   Em caso de **sucesso**, deveremos enviar no corpo (body) da resposta o conteúdo do usuário cadastrado, incluindo seu respectivo `id` e excluindo a senha criptografada.
+  Em caso de **falha na validação**, a resposta deverá possuir **_status code_** apropriado, e em seu corpo (body) deverá possuir um objeto com uma propriedade **mensagem** que deverá possuir como valor um texto explicando o motivo da falha.
 
 - **REQUISITOS OBRIGATÓRIOS**
   - Validar os campos obrigatórios:
@@ -168,7 +172,9 @@ Essa é a rota que será utilizada para cadastrar um novo usuario no sistema.
 ```
 
 ---
+
 # Pessoa A
+
 ### **Login do usuário**
 
 #### `POST` `/login`
@@ -176,15 +182,15 @@ Essa é a rota que será utilizada para cadastrar um novo usuario no sistema.
 Essa é a rota que permite o usuario cadastrado realizar o login no sistema.
 
 - **Requisição**  
-    Sem parâmetros de rota ou de query.  
-    O corpo (body) deverá possuir um objeto com as seguintes propriedades (respeitando estes nomes):
+   Sem parâmetros de rota ou de query.  
+   O corpo (body) deverá possuir um objeto com as seguintes propriedades (respeitando estes nomes):
 
   - email
   - senha
 
 - **Resposta**  
-    Em caso de **sucesso**, o corpo (body) da resposta deverá possuir um objeto com a propriedade **token** que deverá possuir como valor o token de autenticação gerado e uma propriedade **usuario** que deverá possuir as informações do usuário autenticado, exceto a senha do usuário.  
-    Em caso de **falha na validação**, a resposta deverá possuir **_status code_** apropriado, e em seu corpo (body) deverá possuir um objeto com uma propriedade **mensagem** que deverá possuir como valor um texto explicando o motivo da falha.
+   Em caso de **sucesso**, o corpo (body) da resposta deverá possuir um objeto com a propriedade **token** que deverá possuir como valor o token de autenticação gerado e uma propriedade **usuario** que deverá possuir as informações do usuário autenticado, exceto a senha do usuário.  
+   Em caso de **falha na validação**, a resposta deverá possuir **_status code_** apropriado, e em seu corpo (body) deverá possuir um objeto com uma propriedade **mensagem** que deverá possuir como valor um texto explicando o motivo da falha.
 
 - **REQUISITOS OBRIGATÓRIOS**
 
@@ -240,7 +246,9 @@ Essa é a rota que permite o usuario cadastrado realizar o login no sistema.
   - Consultar usuário no banco de dados pelo id contido no token informado
 
 ---
+
 # Pessoa B
+
 ### **Detalhar usuário**
 
 #### `GET` `/usuario`
@@ -249,13 +257,13 @@ Essa é a rota que será chamada quando o usuario quiser obter os dados do seu p
 **Atenção!:** O usuário deverá ser identificado através do ID presente no token de autenticação.
 
 - **Requisição**  
-    Sem parâmetros de rota ou de query.  
-    Não deverá possuir conteúdo no corpo da requisição.
+   Sem parâmetros de rota ou de query.  
+   Não deverá possuir conteúdo no corpo da requisição.
 
 - **Resposta**  
-    Em caso de **sucesso**, o corpo (body) da resposta deverá possuir um objeto que representa o usuário encontrado, com todas as suas propriedades (exceto a senha), conforme exemplo abaixo, acompanhado de **_status code_** apropriado.  
-    Em caso de **falha na validação**, a resposta deverá possuir **_status code_** apropriado, e em seu corpo (body) deverá possuir um objeto com uma propriedade **mensagem** que deverá possuir como valor um texto explicando o motivo da falha.  
-    **Dica:** neste endpoint podemos fazer uso do status code 401 (Unauthorized).
+   Em caso de **sucesso**, o corpo (body) da resposta deverá possuir um objeto que representa o usuário encontrado, com todas as suas propriedades (exceto a senha), conforme exemplo abaixo, acompanhado de **_status code_** apropriado.  
+   Em caso de **falha na validação**, a resposta deverá possuir **_status code_** apropriado, e em seu corpo (body) deverá possuir um objeto com uma propriedade **mensagem** que deverá possuir como valor um texto explicando o motivo da falha.  
+   **Dica:** neste endpoint podemos fazer uso do status code 401 (Unauthorized).
 
 #### **Exemplo de requisição**
 
@@ -281,8 +289,11 @@ Essa é a rota que será chamada quando o usuario quiser obter os dados do seu p
     "mensagem": "Para acessar este recurso um token de autenticação válido deve ser enviado."
 }
 ```
+
 ---
+
 # Pessoa B
+
 ### **Atualizar usuário**
 
 #### `PUT` `/usuario`
@@ -291,16 +302,16 @@ Essa é a rota que será chamada quando o usuário quiser realizar alterações 
 **Atenção!:** O usuário deverá ser identificado através do ID presente no token de autenticação.
 
 - **Requisição**  
-    Sem parâmetros de rota ou de query.  
-    O corpo (body) deverá possuir um objeto com as seguintes propriedades (respeitando estes nomes):
+   Sem parâmetros de rota ou de query.  
+   O corpo (body) deverá possuir um objeto com as seguintes propriedades (respeitando estes nomes):
 
   - nome
   - email
   - senha
 
 - **Resposta**  
-    Em caso de **sucesso**, não deveremos enviar conteúdo no corpo (body) da resposta.  
-    Em caso de **falha na validação**, a resposta deverá possuir **_status code_** apropriado, e em seu corpo (body) deverá possuir um objeto com uma propriedade **mensagem** que deverá possuir como valor um texto explicando o motivo da falha.
+   Em caso de **sucesso**, não deveremos enviar conteúdo no corpo (body) da resposta.  
+   Em caso de **falha na validação**, a resposta deverá possuir **_status code_** apropriado, e em seu corpo (body) deverá possuir um objeto com uma propriedade **mensagem** que deverá possuir como valor um texto explicando o motivo da falha.
 
 - **REQUISITOS OBRIGATÓRIOS**
   - Validar os campos obrigatórios:
@@ -336,8 +347,11 @@ Essa é a rota que será chamada quando o usuário quiser realizar alterações 
     "mensagem": "O e-mail informado já está sendo utilizado por outro usuário."
 }
 ```
+
 ---
+
 # Pessoa B
+
 ### **Listar categorias**
 
 #### `GET` `/categoria`
@@ -345,12 +359,12 @@ Essa é a rota que será chamada quando o usuário quiser realizar alterações 
 Essa é a rota que será chamada quando o usuario logado quiser listar todas as categorias cadastradas.
 
 - **Requisição**  
-    Sem parâmetros de rota ou de query.  
-    Não deverá possuir conteúdo no corpo (body) da requisição.
+   Sem parâmetros de rota ou de query.  
+   Não deverá possuir conteúdo no corpo (body) da requisição.
 
 - **Resposta**  
-    Em caso de **sucesso**, o corpo (body) da resposta deverá possuir um array dos objetos (categorias) encontrados.  
-    Em caso de **falha na validação**, a resposta deverá possuir **_status code_** apropriado, e em seu corpo (body) deverá possuir um objeto com uma propriedade **mensagem** que deverá possuir como valor um texto explicando o motivo da falha.
+   Em caso de **sucesso**, o corpo (body) da resposta deverá possuir um array dos objetos (categorias) encontrados.  
+   Em caso de **falha na validação**, a resposta deverá possuir **_status code_** apropriado, e em seu corpo (body) deverá possuir um objeto com uma propriedade **mensagem** que deverá possuir como valor um texto explicando o motivo da falha.
 
 - **REQUISITOS OBRIGATÓRIOS**
   - O endpoint deverá responder com um array de todas as categorias cadastradas.
@@ -367,23 +381,26 @@ Essa é a rota que será chamada quando o usuario logado quiser listar todas as 
 ```javascript
 // HTTP Status 200 / 201 / 204
 [
-    {
-        id: 1,
-        descricao: "Roupas",
-    },
-    {
-        id: 2,
-        descricao: "Mercado",
-    },
-]
+  {
+    id: 1,
+    descricao: "Roupas",
+  },
+  {
+    id: 2,
+    descricao: "Mercado",
+  },
+];
 ```
 
 ```javascript
 // HTTP Status 200 / 201 / 204
-[]
+[];
 ```
+
 ---
+
 # Pessoa B
+
 ### **Listar transações do usuário logado**
 
 #### `GET` `/transacao`
@@ -392,12 +409,12 @@ Essa é a rota que será chamada quando o usuario logado quiser listar todas as 
 **Lembre-se:** Deverão ser retornadas **apenas** transações associadas ao usuário logado, que deverá ser identificado através do ID presente no token de validação.
 
 - **Requisição**  
-    Sem parâmetros de rota ou de query.  
-    Não deverá possuir conteúdo no corpo (body) da requisição.
+   Sem parâmetros de rota ou de query.  
+   Não deverá possuir conteúdo no corpo (body) da requisição.
 
 - **Resposta**  
-    Em caso de **sucesso**, o corpo (body) da resposta deverá possuir um array dos objetos (transações) encontrados.  
-    Em caso de **falha na validação**, a resposta deverá possuir **_status code_** apropriado, e em seu corpo (body) deverá possuir um objeto com uma propriedade **mensagem** que deverá possuir como valor um texto explicando o motivo da falha.
+   Em caso de **sucesso**, o corpo (body) da resposta deverá possuir um array dos objetos (transações) encontrados.  
+   Em caso de **falha na validação**, a resposta deverá possuir **_status code_** apropriado, e em seu corpo (body) deverá possuir um objeto com uma propriedade **mensagem** que deverá possuir como valor um texto explicando o motivo da falha.
 
 - **REQUISITOS OBRIGATÓRIOS**
   - O usuário deverá ser identificado através do ID presente no token de validação
@@ -415,35 +432,38 @@ Essa é a rota que será chamada quando o usuario logado quiser listar todas as 
 ```javascript
 // HTTP Status 200 / 201 / 204
 [
-    {
-        id: 1,
-        tipo: "saida",
-        descricao: "Sapato amarelo",
-        valor: 15800,
-        data: "2022-03-23T15:35:00.000Z",
-        usuario_id: 5,
-        categoria_id: 4,
-        categoria_nome: "Roupas",
-    },
-    {
-        id: 3,
-        tipo: "entrada",
-        descricao: "Salário",
-        valor: 300000,
-        data: "2022-03-24T15:30:00.000Z",
-        usuario_id: 5,
-        categoria_id: 6,
-        categoria_nome: "Salários",
-    },
-]
+  {
+    id: 1,
+    tipo: "saida",
+    descricao: "Sapato amarelo",
+    valor: 15800,
+    data: "2022-03-23T15:35:00.000Z",
+    usuario_id: 5,
+    categoria_id: 4,
+    categoria_nome: "Roupas",
+  },
+  {
+    id: 3,
+    tipo: "entrada",
+    descricao: "Salário",
+    valor: 300000,
+    data: "2022-03-24T15:30:00.000Z",
+    usuario_id: 5,
+    categoria_id: 6,
+    categoria_nome: "Salários",
+  },
+];
 ```
 
 ```javascript
 // HTTP Status 200 / 201 / 204
-[]
+[];
 ```
+
 ---
+
 # Pessoa A
+
 ### **Detalhar uma transação do usuário logado**
 
 #### `GET` `/transacao/:id`
@@ -452,12 +472,12 @@ Essa é a rota que será chamada quando o usuario logado quiser obter uma das su
 **Lembre-se:** Deverá ser retornado **apenas** transação associada ao usuário logado, que deverá ser identificado através do ID presente no token de validação.
 
 - **Requisição**  
-    Deverá ser enviado o ID da transação no parâmetro de rota do endpoint.  
-    O corpo (body) da requisição não deverá possuir nenhum conteúdo.
+   Deverá ser enviado o ID da transação no parâmetro de rota do endpoint.  
+   O corpo (body) da requisição não deverá possuir nenhum conteúdo.
 
 - **Resposta**  
-    Em caso de **sucesso**, o corpo (body) da resposta deverá possuir um objeto que representa a transação encontrada, com todas as suas propriedades, conforme exemplo abaixo, acompanhado de **_status code_** apropriado.  
-    Em caso de **falha na validação**, a resposta deverá possuir **_status code_** apropriado, e em seu corpo (body) deverá possuir um objeto com uma propriedade **mensagem** que deverá possuir como valor um texto explicando o motivo da falha.
+   Em caso de **sucesso**, o corpo (body) da resposta deverá possuir um objeto que representa a transação encontrada, com todas as suas propriedades, conforme exemplo abaixo, acompanhado de **_status code_** apropriado.  
+   Em caso de **falha na validação**, a resposta deverá possuir **_status code_** apropriado, e em seu corpo (body) deverá possuir um objeto com uma propriedade **mensagem** que deverá possuir como valor um texto explicando o motivo da falha.
 
 - **REQUISITOS OBRIGATÓRIOS**
   - Validar se existe transação para o id enviado como parâmetro na rota e se esta transação pertence ao usuário logado.
@@ -491,8 +511,11 @@ Essa é a rota que será chamada quando o usuario logado quiser obter uma das su
     "mensagem": "Transação não encontrada."
 }
 ```
+
 ---
+
 # Pessoa A
+
 ### **Cadastrar transação para o usuário logado**
 
 #### `POST` `/transacao`
@@ -501,8 +524,8 @@ Essa é a rota que será utilizada para cadastrar uma transação associada ao u
 **Lembre-se:** Deverá ser possível cadastrar **apenas** transações associadas ao próprio usuário logado, que deverá ser identificado através do ID presente no token de validação.
 
 - **Requisição**  
-    Sem parâmetros de rota ou de query.  
-    O corpo (body) da requisição deverá possuir um objeto com as seguintes propriedades (respeitando estes nomes):
+   Sem parâmetros de rota ou de query.  
+   O corpo (body) da requisição deverá possuir um objeto com as seguintes propriedades (respeitando estes nomes):
 
   - descricao
   - valor
@@ -511,8 +534,8 @@ Essa é a rota que será utilizada para cadastrar uma transação associada ao u
   - tipo (campo que será informado se a transação corresponde a uma saída ou entrada de valores)
 
 - **Resposta**
-    Em caso de **sucesso**, deveremos enviar, no corpo (body) da resposta, as informações da transação cadastrada, incluindo seu respectivo `id`.  
-    Em caso de **falha na validação**, a resposta deverá possuir **_status code_** apropriado, e em seu corpo (body) deverá possuir um objeto com uma propriedade **mensagem** que deverá possuir como valor um texto explicando o motivo da falha.
+  Em caso de **sucesso**, deveremos enviar, no corpo (body) da resposta, as informações da transação cadastrada, incluindo seu respectivo `id`.  
+   Em caso de **falha na validação**, a resposta deverá possuir **_status code_** apropriado, e em seu corpo (body) deverá possuir um objeto com uma propriedade **mensagem** que deverá possuir como valor um texto explicando o motivo da falha.
 
 - **REQUISITOS OBRIGATÓRIOS**
   - Validar os campos obrigatórios:
@@ -560,8 +583,11 @@ Essa é a rota que será utilizada para cadastrar uma transação associada ao u
     "mensagem": "Todos os campos obrigatórios devem ser informados."
 }
 ```
+
 ---
+
 # Pessoa B
+
 ### **Atualizar transação do usuário logado**
 
 #### `PUT` `/transacao/:id`
@@ -570,8 +596,8 @@ Essa é a rota que será chamada quando o usuario logado quiser atualizar uma da
 **Lembre-se:** Deverá ser possível atualizar **apenas** transações associadas ao próprio usuário logado, que deverá ser identificado através do ID presente no token de validação.
 
 - **Requisição**  
-    Deverá ser enviado o ID da transação no parâmetro de rota do endpoint.  
-    O corpo (body) da requisição deverá possuir um objeto com as seguintes propriedades (respeitando estes nomes):
+   Deverá ser enviado o ID da transação no parâmetro de rota do endpoint.  
+   O corpo (body) da requisição deverá possuir um objeto com as seguintes propriedades (respeitando estes nomes):
 
   - descricao
   - valor
@@ -580,8 +606,8 @@ Essa é a rota que será chamada quando o usuario logado quiser atualizar uma da
   - tipo (campo que será informado se a transação corresponde a uma saída ou entrada de valores)
 
 - **Resposta**  
-    Em caso de **sucesso**, não deveremos enviar conteúdo no corpo (body) da resposta.  
-    Em caso de **falha na validação**, a resposta deverá possuir **_status code_** apropriado, e em seu corpo (body) deverá possuir um objeto com uma propriedade **mensagem** que deverá possuir como valor um texto explicando o motivo da falha.
+   Em caso de **sucesso**, não deveremos enviar conteúdo no corpo (body) da resposta.  
+   Em caso de **falha na validação**, a resposta deverá possuir **_status code_** apropriado, e em seu corpo (body) deverá possuir um objeto com uma propriedade **mensagem** que deverá possuir como valor um texto explicando o motivo da falha.
 
 - **REQUISITOS OBRIGATÓRIOS**
   - Validar se existe transação para o id enviado como parâmetro na rota e se esta transação pertence ao usuário logado.
@@ -621,8 +647,11 @@ Essa é a rota que será chamada quando o usuario logado quiser atualizar uma da
     "mensagem": "Todos os campos obrigatórios devem ser informados."
 }
 ```
+
 ---
+
 # Pessoa B
+
 ### **Excluir transação do usuário logado**
 
 #### `DELETE` `/transacao/:id`
@@ -631,12 +660,12 @@ Essa é a rota que será chamada quando o usuario logado quiser excluir uma das 
 **Lembre-se:** Deverá ser possível excluir **apenas** transações associadas ao próprio usuário logado, que deverá ser identificado através do ID presente no token de validação.
 
 - **Requisição**  
-    Deverá ser enviado o ID da transação no parâmetro de rota do endpoint.  
-    O corpo (body) da requisição não deverá possuir nenhum conteúdo.
+   Deverá ser enviado o ID da transação no parâmetro de rota do endpoint.  
+   O corpo (body) da requisição não deverá possuir nenhum conteúdo.
 
 - **Resposta**  
-    Em caso de **sucesso**, não deveremos enviar conteúdo no corpo (body) da resposta.  
-    Em caso de **falha na validação**, a resposta deverá possuir **_status code_** apropriado, e em seu corpo (body) deverá possuir um objeto com uma propriedade **mensagem** que deverá possuir como valor um texto explicando o motivo da falha.
+   Em caso de **sucesso**, não deveremos enviar conteúdo no corpo (body) da resposta.  
+   Em caso de **falha na validação**, a resposta deverá possuir **_status code_** apropriado, e em seu corpo (body) deverá possuir um objeto com uma propriedade **mensagem** que deverá possuir como valor um texto explicando o motivo da falha.
 
 - **REQUISITOS OBRIGATÓRIOS**:
   - Validar se existe transação para o id enviado como parâmetro na rota e se esta transação pertence ao usuário logado.
@@ -662,8 +691,11 @@ Essa é a rota que será chamada quando o usuario logado quiser excluir uma das 
     "mensagem": "Transação não encontrada."
 }
 ```
+
 ---
+
 # Pessoa A
+
 ### **Obter extrato de transações**
 
 #### `GET` `/transacao/extrato`
@@ -672,12 +704,12 @@ Essa é a rota que será chamada quando o usuario logado quiser obter o extrato 
 **Lembre-se:** Deverá ser possível consultar **apenas** transações associadas ao próprio usuário logado, que deverá ser identificado através do ID presente no token de validação.
 
 - **Requisição**  
-    Sem parâmetros de rota ou de query.  
-    O corpo (body) da requisição não deverá possuir nenhum conteúdo.
+   Sem parâmetros de rota ou de query.  
+   O corpo (body) da requisição não deverá possuir nenhum conteúdo.
 
 - **Resposta**  
-    Em caso de **sucesso**, deveremos enviar no corpo (body) da resposta um objeto contendo a soma de todas as transações do tipo `entrada` e a soma de todas as transações do tipo `saida`.  
-    Em caso de **falha na validação**, a resposta deverá possuir **_status code_** apropriado, e em seu corpo (body) deverá possuir um objeto com uma propriedade **mensagem** que deverá possuir como valor um texto explicando o motivo da falha.
+   Em caso de **sucesso**, deveremos enviar no corpo (body) da resposta um objeto contendo a soma de todas as transações do tipo `entrada` e a soma de todas as transações do tipo `saida`.  
+   Em caso de **falha na validação**, a resposta deverá possuir **_status code_** apropriado, e em seu corpo (body) deverá possuir um objeto com uma propriedade **mensagem** que deverá possuir como valor um texto explicando o motivo da falha.
 
 - **REQUISITOS OBRIGATÓRIOS**:
   - Em caso de não existir transações do tipo `entrada` cadastradas para o usuário logado, o valor retornado no corpo (body) da resposta deverá ser 0.
@@ -703,7 +735,9 @@ Essa é a rota que será chamada quando o usuario logado quiser obter o extrato 
 ```
 
 ---
+
 # Pessoa A
+
 ## **EXTRA**
 
 **ATENÇÃO!:** Esta parte extra não é obrigatória e recomendamos que seja feita apenas quando terminar toda a parte obrigatória acima.
@@ -715,12 +749,12 @@ Na funcionalidade de listagem de transações do usuário logado (**GET /transac
 **Lembre-se:** Deverão ser retornadas **apenas** transações associadas ao usuário logado, que deverá ser identificado através do ID presente no token de validação.
 
 - **Requisição**  
-    Parâmetro opcional do tipo query **filtro**.
-    Não deverá possuir conteúdo no corpo (body) da requisição.
+   Parâmetro opcional do tipo query **filtro**.
+  Não deverá possuir conteúdo no corpo (body) da requisição.
 
 - **Resposta**  
-    Em caso de **sucesso**, o corpo (body) da resposta deverá possuir um array dos objetos (transações) encontradas.  
-    Em caso de **falha na validação**, a resposta deverá possuir **_status code_** apropriado, e em seu corpo (body) deverá possuir um objeto com uma propriedade **mensagem** que deverá possuir como valor um texto explicando o motivo da falha.
+   Em caso de **sucesso**, o corpo (body) da resposta deverá possuir um array dos objetos (transações) encontradas.  
+   Em caso de **falha na validação**, a resposta deverá possuir **_status code_** apropriado, e em seu corpo (body) deverá possuir um objeto com uma propriedade **mensagem** que deverá possuir como valor um texto explicando o motivo da falha.
 
 - **REQUISITOS OBRIGATÓRIOS**
   - O usuário deverá ser identificado através do ID presente no token de validação
@@ -739,32 +773,32 @@ Na funcionalidade de listagem de transações do usuário logado (**GET /transac
 ```javascript
 // HTTP Status 200 / 201 / 204
 [
-    {
-        id: 1,
-        tipo: "saida",
-        descricao: "Sapato amarelo",
-        valor: 15800,
-        data: "2022-03-23T15:35:00.000Z",
-        usuario_id: 5,
-        categoria_id: 11,
-        categoria_nome: "Roupas",
-    },
-    {
-        id: 3,
-        tipo: "entrada",
-        descricao: "Salário",
-        valor: 300000,
-        data: "2022-03-24T15:30:00.000Z",
-        usuario_id: 5,
-        categoria_id: 14,
-        categoria_nome: "Salário",
-    },
-]
+  {
+    id: 1,
+    tipo: "saida",
+    descricao: "Sapato amarelo",
+    valor: 15800,
+    data: "2022-03-23T15:35:00.000Z",
+    usuario_id: 5,
+    categoria_id: 11,
+    categoria_nome: "Roupas",
+  },
+  {
+    id: 3,
+    tipo: "entrada",
+    descricao: "Salário",
+    valor: 300000,
+    data: "2022-03-24T15:30:00.000Z",
+    usuario_id: 5,
+    categoria_id: 14,
+    categoria_nome: "Salário",
+  },
+];
 ```
 
 ```javascript
 // HTTP Status 200 / 201 / 204
-[]
+[];
 ```
 
 ---
