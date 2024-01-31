@@ -1,9 +1,9 @@
-import pool from '../../configs/conection.js'
+import pool from "../../configs/conection.js";
 
 export const getTransactions = async (req, res) => {
-    const userId = req.usuario.id;
-    try {
-        const query = `
+  const userId = req.usuario.id;
+  try {
+    const query = `
             select
                 t.id,
                 t.tipo,
@@ -20,11 +20,11 @@ export const getTransactions = async (req, res) => {
             where
                 t.usuario_id = $1
         `;
-        const params = [userId];
-        const { rows } = await pool.query(query, params);
-        return res.status(200).json(rows);
-    } catch (error) {
-        console.error("Erro ao listar transações: ", error);
-        res.status(500).json({ mensagem: error.message });
-    }
+    const params = [userId];
+    const { rows } = await pool.query(query, params);
+    return res.status(200).json(rows);
+  } catch (error) {
+    console.error("Erro ao listar transações: ", error);
+    res.status(500).json({ mensagem: error.message });
+  }
 };
