@@ -19,7 +19,10 @@ router.post('/transacao',
 router.get('/usuario', controller.getUser)
 router.get('/categorias', controller.getCategories)
 router.get('/transacao', controller.getTransactions)
+router.get('/extra', controller.getExtra)
+router.get('/transacao/extrato', controller.getSummary)
 router.get('/transacao/:id', controller.getTransacById)
+
 
 router.put('/usuario', middleware.validateUsers, controller.putUser)
 router.put('/transacao/:id',
