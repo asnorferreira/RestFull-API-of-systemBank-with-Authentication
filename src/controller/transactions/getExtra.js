@@ -1,5 +1,6 @@
 import pool from "../../configs/conection.js";
 
+
 export const getExtra = async (req, res) => {
     const userId = req.usuario.id;
     const { filtro } = req.query;
